@@ -4,16 +4,22 @@
 @section('content')
     <section class="mt-4 pt-4">
         <div class="container d-flex justify-content-center">
-            <div class="d-flex w-50 p-4 bg-secondary">
-                <img class="" src="{{ $comic->thumb }}" alt="Card image cap">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Title : {{ $comic->title }}</li>
-                    <li class="list-group-item">Series : {{ $comic->series }}</li>
-                    <li class="list-group-item">Price : {{ $comic->price }}</li>
-                    <li class="list-group-item">Type : {{ $comic->type }}</li>
-                </ul>
 
+            <div class="d-flex w-75 rounded text-dark p-4 bg-secondary">
+                @if (!empty($comic->thumb))
+                    <img class="" src="{{ $comic->thumb }}" alt="{{ $comic->title }}">
+                @else
+                    <p>no image</p>
+                @endif
+
+                <div class="d-flex flex-column justify-content-between p-4">
+                    <h4>Title : {{ $comic->title }}</h4>
+                    <h4>Series : {{ $comic->series }}</h4>
+                    <h4>Price : {{ $comic->price }}</h4>
+                    <h4>Type : {{ $comic->type }}</h4>
+                </div>
             </div>
+
         </div>
     </section>
 @endsection
