@@ -2,9 +2,9 @@
 
 @section('title', $comic->series)
 @section('content')
-    <section>
+    <section class="mt-4 pt-4">
         <div class="container d-flex justify-content-center">
-            <div class="d-flex bg-light">
+            <div class="d-flex w-50 p-4 bg-secondary">
                 <img class="" src="{{ $comic->thumb }}" alt="Card image cap">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">Title : {{ $comic->title }}</li>

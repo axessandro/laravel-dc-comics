@@ -4,10 +4,8 @@
 
 @section('content')
     <section class="container">
-        <div class="d-flex justify-content-center">
-            <button class="btn btn-success text mb-4"><a href="{{ route('comics.create') }}">Add new comic</a></button>
-        </div>
-        <h2>Comics List</h1>
+
+        <h2 class="py-3 text-center">Comics List</h1>
 
             <table class="table text-light">
                 <thead class="bg-primary">
@@ -28,13 +26,25 @@
                             <td>{{ $comic->series }}</td>
                             <td>{{ $comic->price }}</td>
                             <td>{{ $comic->type }}</td>
-                            <td>
-                                <button class="btn btn-primary text mb-4"><a
+                            <td class="d-flex">
+                                <button class="btn btn-secondary text"><a
                                         href="{{ route('comics.show', $comic->id) }}">details</a></button>
+                                <button class="btn btn-warning text"><a
+                                        href="{{ route('comics.edit', $comic->id) }}">edit</a></button>
+
+                                <form action="{{ route('comics.destroy', $comic->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger text"><a
+                                            href="{{ route('comics.destroy', $comic->id) }}">delete</a></button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-success text mb-4"><a href="{{ route('comics.create') }}">Add new comic</a></button>
+            </div>
     </section>
 @endsection

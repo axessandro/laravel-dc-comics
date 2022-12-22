@@ -39,11 +39,12 @@ class ComicController extends Controller
     {
         $data = $request->all();
         $comic = new Comic();
-        $comic->title = $data['title'];
-        $comic->series = $data['series'];
-        $comic->thumb = $data['thumb'];
-        $comic->price = $data['price'];
-        $comic->type = $data['type'];
+        $comic->fill($data);
+        // $comic->title = $data['title'];
+        // $comic->series = $data['series'];
+        // $comic->thumb = $data['thumb'];
+        // $comic->price = $data['price'];
+        // $comic->type = $data['type'];
         $comic->save();
 
         return redirect()->route('comics.show', $comic->id);
@@ -55,9 +56,9 @@ class ComicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Comic $comic)
     {
-        $comic = Comic::findOrFail($id);
+        // $comic = Comic::findOrFail($id);
         return view('comics.show', compact('comic'));
     }
 
@@ -67,9 +68,9 @@ class ComicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Comic $comic)
     {
-        //
+        return view('comics.edit', compact('comic'));
     }
 
     /**
@@ -79,9 +80,11 @@ class ComicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Comic $comic)
     {
-        //
+        $editData = $request->all();
+        $comic->update($editData);
+        return redirect()->route('comics.show', $comic->id);
     }
 
     /**
@@ -90,8 +93,9 @@ class ComicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Comic $comic)
     {
-        //
+        $comic->delete();
+        return redirect()->route('comics.index');
     }
 }
