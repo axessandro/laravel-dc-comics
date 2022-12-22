@@ -24,7 +24,11 @@
             </div>
             <div class="mb-1">
                 <label for="type">type:</label>
-                <input type="text" class="form-control" id="type" name="type">
+                <select name="type" id="type" class="form-control">
+                    <option value="">Select type</option>
+                    <option value="comic book">Comic Book</option>
+                    <option value="graphic novel">Graphic Novel</option>
+                </select>
             </div>
 
             <div class="d-flex justify-content-center">
