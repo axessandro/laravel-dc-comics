@@ -13,7 +13,9 @@
 <body class="bg-dark text-light">
     <header>
         <h1 class="text-center p-4">Comics Shop</h1>
-        <button class="btn btn-danger text mb-4"><a href="{{ route('comics.index') }}">View List</a></button>
+        <div class="d-flex justify-content-center">
+            <button class="btn btn-danger text mb-4"><a href="{{ route('comics.index') }}">View List</a></button>
+        </div>
     </header>
 
     <main>

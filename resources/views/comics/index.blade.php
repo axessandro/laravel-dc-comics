@@ -4,6 +4,9 @@
 
 @section('content')
     <section class="container">
+        <div class="d-flex justify-content-center">
+            <button class="btn btn-success text mb-4"><a href="{{ route('comics.create') }}">Add new comic</a></button>
+        </div>
         <h2>Comics List</h1>
 
             <table class="table text-light">
@@ -26,7 +29,7 @@
                             <td>{{ $comic->price }}</td>
                             <td>{{ $comic->type }}</td>
                             <td>
-                                <button class="btn btn-success text mb-4"><a
+                                <button class="btn btn-primary text mb-4"><a
                                         href="{{ route('comics.show', $comic->id) }}">details</a></button>
                             </td>
                         </tr>
