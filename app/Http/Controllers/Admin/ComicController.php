@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Comic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ComicController extends Controller
 {
@@ -37,7 +38,7 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        $data = $this->validation($request->all());
         $comic = new Comic();
         $comic->fill($data);
         // $comic->title = $data['title'];
@@ -82,7 +83,7 @@ class ComicController extends Controller
      */
     public function update(Request $request, Comic $comic)
     {
-        $editData = $request->all();
+        $editData = $this->validation($request->all());
         $comic->update($editData);
         return redirect()->route('comics.show', $comic->id);
     }
@@ -97,5 +98,25 @@ class ComicController extends Controller
     {
         $comic->delete();
         return redirect()->route('comics.index');
+    }
+
+    private function validation($data)
+    {
+        $validationResult = Validator::make($data, [
+            'title' => 'required|min:8|max:100',
+            'series' => 'required',
+            'thumb' => 'required',
+            'price' => 'required',
+            'type' => 'required'
+        ], [
+            'title.required' => 'Il titolo è obbligatorio',
+            'title.min' => 'La lunghezza minima del titolo è di min: caratteri',
+            'title.max' => 'La lunghezza massima del titolo è di max: caratteri',
+            'series.required' => 'La serie è obbligatoria',
+            'thumb.required' => "L'immagine è obbligatoria",
+            'price.required' => 'Il prezzo è obbligatorio',
+            'type.required' => 'La tipologia è obbligatoria'
+        ])->validate();
+        return $validationResult;
     }
 }
